@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Dear Calendar</string>
+    <string name="NavDrawerOpen">Open Navigation Drawer</string>
+    <string name="NavDrawerClose">Close Navigation Drawer</string>
+</resources>
