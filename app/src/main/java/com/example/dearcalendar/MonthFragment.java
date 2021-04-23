@@ -12,11 +12,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.Month;
 import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -25,7 +29,6 @@ import java.util.Locale;
 
 public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnItemListener{
 
-    private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private Calendar selectedDate;
 
@@ -42,7 +45,6 @@ public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnIte
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //getActivity().setContentView(R.layout.month_view); //Not needed for fragment
-
         selectedDate = new GregorianCalendar();
         initWidgets();
         setMonthView();
@@ -55,7 +57,6 @@ public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnIte
     {
         try {
             calendarRecyclerView = getActivity().findViewById(R.id.monthRecycler);
-            monthYearText = getActivity().findViewById(R.id.monthYear);
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -79,7 +80,9 @@ public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnIte
     {
 
         String toDisplay = getMonthYear(selectedDate);
-        monthYearText.setText(toDisplay);
+
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle(toDisplay);
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
         //This part doesn't work
@@ -146,13 +149,33 @@ public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnIte
         return  daysInMonthArray;
     }
 
+    protected void startFragment(int id, Fragment fragment)
+    {
+        getFragmentManager().beginTransaction().replace(id,
+                fragment).addToBackStack(null).commit(); //display the desired fragment
+    }
+
 
     public void onItemClick(int position, String dayText)
     {
         if(!dayText.equals(""))
         {
+            /*
             String message = "Selected Date " + dayText + " " + getMonthYear(selectedDate);
             Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+             */
+            String data = dayText + " " + getMonthYear(selectedDate);
+            Bundle sendData = new Bundle();
+            sendData.putString("dayMonth",data);
+            sendData.putString("day", dayText);
+            sendData.putInt("month", selectedDate.get(Calendar.MONTH));
+            sendData.putInt("year", selectedDate.get(Calendar.YEAR));
+
+            Fragment fragment = new DayFragment();
+            fragment.setArguments(sendData);
+
+            startFragment(R.id.fragmentContainer, fragment);
+
         }
     }
 

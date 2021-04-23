@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/dayLayout"
+        android:layout_marginTop="60dp"
+        >
+
+        <TextView
+            android:id="@+id/dayMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Events to show"
+            android:layout_gravity="center|center_vertical"
+            android:textSize="20sp"
+            />
+    <ListView
+        android:id="@+id/dayList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:dividerHeight="-1.0sp"
+        >
+
+    </ListView>
+
+    </LinearLayout>
+
+
+
+    <ImageButton
+        android:id="@+id/createEventButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_50"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@id/dayLayout"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+        />
+
+
+</RelativeLayout>

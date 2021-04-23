@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="100"
+    android:background="@color/white"
+    android:id="@+id/event"
+    android:layout_marginTop="-2dp"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="75.0"
+        android:id="@+id/eventTime"
+        >
+        <TextView
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="12:00"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/eventStart"
+            />
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="@color/black"
+            />
+        <TextView
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="12:00"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/eventEnd"
+            />
+        <View
+            android:layout_height="3dp"
+            android:layout_width="match_parent"
+            android:background="@color/black"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="1dp"
+        android:background="@color/black"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="25.0">
+
+
+
+        <TextView
+            android:gravity="center"
+            android:text="Event Title"
+            android:layout_width="match_parent"
+            android:layout_height="61.5dp"
+            android:id="@+id/eventTitle"
+            />
+        <View
+            android:layout_height="3dp"
+            android:layout_width="match_parent"
+            android:background="@color/black"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

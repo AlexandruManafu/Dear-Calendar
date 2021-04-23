@@ -31,7 +31,9 @@
                 android:background="@color/white"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints"
+                android:overScrollMode="always"
+                />
 
             <FrameLayout
                 android:id="@+id/fragmentContainer"

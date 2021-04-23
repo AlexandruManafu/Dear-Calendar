@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/eventLayout"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="150dp"
+        android:layout_marginTop="60dp"
+        >
+        <EditText
+            android:id="@+id/createEventTitle"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:hint="Event Title"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:inputType="text"
+            android:background="@color/white"
+            android:layout_marginBottom="10dp"
+            android:autofillHints="Event Title"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            >
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/createEventColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginBottom="10dp"
+            >
+        </androidx.appcompat.widget.AppCompatSpinner>
+
+        <ImageView
+            android:id="@+id/createEventPreview"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:background="@color/white"
+            android:contentDescription="Color Preview"
+            >
+        </ImageView>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_height="50dp">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:id="@+id/createEventStart"
+                    android:text="Start Hour"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="20dp"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:id="@+id/createEventEnd"
+                    android:text="End Hour"
+                    android:layout_height="50dp"
+                    />
+         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            >
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/createEventReccurence"
+
+            android:layout_marginLeft="-5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            >
+        </androidx.appcompat.widget.AppCompatSpinner>
+
+            <EditText
+                android:id="@+id/createEventExpire"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:hint="Expires in (months)"
+                android:inputType="number"
+                android:background="@color/white"
+                android:autofillHints="Event Title"
+                />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/createEventDetails"
+            android:inputType="textLongMessage|textMultiLine"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:hint="Details"
+            android:autofillHints="Details"
+            android:background="#F8F8FF"
+            android:gravity="start"
+            android:textAlignment="gravity"
+            />
+
+        <Button
+            android:id="@+id/createEventConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Create Event"
+
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+
+            />
+        <TextView
+            android:id="@+id/createEventError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible"
+            android:textColor="@color/carmine_pink"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            >
+        </TextView>
+
+    </LinearLayout>
+
+</ScrollView>

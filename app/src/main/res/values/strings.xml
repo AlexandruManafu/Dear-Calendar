@@ -2,4 +2,6 @@
     <string name="app_name">Dear Calendar</string>
     <string name="NavDrawerOpen">Open Navigation Drawer</string>
     <string name="NavDrawerClose">Close Navigation Drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

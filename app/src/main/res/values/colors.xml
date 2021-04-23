@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="jade">#00A86B</color>
+    <color name="cobalt">#0047AB</color>
+    <color name="dandelion">#F0E130</color>
+    <color name="carmine_pink">#EF3038</color>
+
 </resources>
