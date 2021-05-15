@@ -1,5 +1,6 @@
 package com.example.dearcalendar;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
 
@@ -7,31 +8,23 @@ import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.Month;
 import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 
 public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnItemListener{
 
     private RecyclerView calendarRecyclerView;
     private Calendar selectedDate;
-
 
     @Nullable
     @Override
@@ -76,7 +69,7 @@ public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnIte
         return  "" + month + " " + year;
     }
 
-    private void setMonthView()
+    public void setMonthView()
     {
 
         String toDisplay = getMonthYear(selectedDate);
@@ -85,9 +78,8 @@ public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnIte
         toolbar.setTitle(toDisplay);
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
-        //This part doesn't work
-        MonthDisplayAdapter monthDisplayAdapter = new MonthDisplayAdapter(daysInMonth,
-          this);
+        MonthDisplayAdapter monthDisplayAdapter = new MonthDisplayAdapter(getContext(),daysInMonth,
+          this,selectedDate);
 
         try {
             RecyclerView.LayoutManager layoutManager = new
@@ -166,6 +158,7 @@ public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnIte
              */
             String data = dayText + " " + getMonthYear(selectedDate);
             Bundle sendData = new Bundle();
+            sendData.putString("task","Create");
             sendData.putString("dayMonth",data);
             sendData.putString("day", dayText);
             sendData.putInt("month", selectedDate.get(Calendar.MONTH));
@@ -188,7 +181,8 @@ public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnIte
     private void handleSwipes()
     {
         ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback
-                (0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                (0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT |
+                        ItemTouchHelper.UP | ItemTouchHelper.DOWN) {
 
             //can ignore this method
             @Override
@@ -200,18 +194,22 @@ public class MonthFragment extends Fragment implements MonthDisplayAdapter.OnIte
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 if(direction==ItemTouchHelper.LEFT)
-                {
                     refreshMonth(1);
-                }
-                else if(direction==ItemTouchHelper.RIGHT) {
+                else if(direction==ItemTouchHelper.RIGHT)
                     refreshMonth(-1);
-                }
+                else if(direction==ItemTouchHelper.UP)
+                    refreshMonth(-12);
+                else if(direction==ItemTouchHelper.DOWN)
+                    refreshMonth(12);
+
             }
 
             //Override the animation
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 //super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+
             }
         };
 

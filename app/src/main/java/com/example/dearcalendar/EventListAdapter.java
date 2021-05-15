@@ -1,16 +1,16 @@
 package com.example.dearcalendar;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import java.util.ArrayList;
 
 public class EventListAdapter extends ArrayAdapter<EventHolder> {
@@ -33,23 +33,48 @@ public class EventListAdapter extends ArrayAdapter<EventHolder> {
         String start = getItem(position).getStart();
         String end = getItem(position).getEnd();
 
+
+        EventViewHolder holder = new EventViewHolder();
         LayoutInflater inflater = LayoutInflater.from(context);
-        convertView = inflater.inflate(resource, parent, false);
-
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.eventTitle);
-        LinearLayout tvElement = (LinearLayout) convertView.findViewById(R.id.event);
-        TextView tvStart = (TextView) convertView.findViewById(R.id.eventStart);
-        TextView tvEnd = (TextView) convertView.findViewById(R.id.eventEnd);
-
         int colorId = MainActivity.colors.get(color);
+        //This part ensures that scrolling is smooth
+        if(convertView==null)
+        {
+            convertView = inflater.inflate(resource, parent, false);
 
-        tvTitle.setText(title);
-        tvElement.setBackgroundColor(colorId);
-        tvStart.setText(start);
-        tvEnd.setText(end);
+            holder.title =  convertView.findViewById(R.id.eventTitle);
+            holder.element =  convertView.findViewById(R.id.event);
+            holder.start =  convertView.findViewById(R.id.eventStart);
+            holder.end =  convertView.findViewById(R.id.eventEnd);
+            holder.image = convertView.findViewById(R.id.eventImage);
+
+            convertView.setTag(holder);
+        }
+        else
+        {
+            holder = (EventViewHolder)  convertView.getTag();
+        }
+
+
+        holder.title.setText(title);
+        holder.element.setBackgroundColor(colorId);
+        holder.start.setText(start);
+        holder.end.setText(end);
+
+        byte[] imageBytes = getItem(position).getImage();
+        if(imageBytes!=null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+
+            RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(context.getResources(),bitmap);
+            dr.setCornerRadius(20);
+            holder.image.setImageDrawable(dr);
+            //imageView.setImageBitmap(bitmap);
+        }
 
         return convertView;
     }
+
+
 
 
 }

@@ -4,27 +4,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/eventLayout"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:paddingBottom="150dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="56dp"
         >
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="@color/black"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            >
         <EditText
             android:id="@+id/createEventTitle"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:hint="Event Title"
+            android:hint="@string/event_title"
             style="@style/TextAppearance.AppCompat.Title"
             android:inputType="text"
             android:background="@color/white"
             android:layout_marginBottom="10dp"
             android:autofillHints="Event Title"
+            android:layout_marginTop="6dp"
             />
 
         <LinearLayout
@@ -41,6 +53,8 @@
             >
         </androidx.appcompat.widget.AppCompatSpinner>
 
+
+
         <ImageView
             android:id="@+id/createEventPreview"
             android:layout_marginLeft="10dp"
@@ -48,10 +62,38 @@
             android:layout_width="30dp"
             android:layout_height="20dp"
             android:background="@color/white"
-            android:contentDescription="Color Preview"
+            android:contentDescription="@string/color_preview"
             >
         </ImageView>
+
     </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                >
+                  <Button
+                      android:id="@+id/createEventImage"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Add an Image"
+                      android:layout_marginRight="15dp"
+                      android:layout_gravity="center_vertical"
+                      >
+                  </Button>
+                  <ImageView
+                      android:id="@+id/createImagePreview"
+                      android:layout_width="100dp"
+                      android:background="@drawable/rounded_square"
+                      android:outlineProvider="background"
+                      android:layout_height="match_parent"
+                      android:adjustViewBounds="true"
+                      >
+                  </ImageView>
+            </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -60,14 +102,14 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:id="@+id/createEventStart"
-                    android:text="Start Hour"
+                    android:text="@string/start_hour"
                     android:layout_height="50dp"
                     android:layout_marginRight="20dp"
                     />
                 <Button
                     android:layout_width="wrap_content"
                     android:id="@+id/createEventEnd"
-                    android:text="End Hour"
+                    android:text="@string/end_hour"
                     android:layout_height="50dp"
                     />
          </LinearLayout>
@@ -90,11 +132,11 @@
 
             <EditText
                 android:id="@+id/createEventExpire"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:hint="Expires in (months)"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="3dp"
+                android:hint="Recurrence duration (months)"
                 android:inputType="number"
                 android:background="@color/white"
                 android:autofillHints="Event Title"
@@ -109,7 +151,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:hint="Details"
+            android:hint="@string/details"
             android:autofillHints="Details"
             android:background="#F8F8FF"
             android:gravity="start"
@@ -120,7 +162,7 @@
             android:id="@+id/createEventConfirm"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Create Event"
+            android:text="@string/create_event"
 
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
@@ -138,6 +180,7 @@
             >
         </TextView>
 
+    </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

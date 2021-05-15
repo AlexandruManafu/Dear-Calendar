@@ -9,14 +9,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/dayLayout"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="56dp"
         >
 
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="@color/black"
+            />
         <TextView
             android:id="@+id/dayMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Events to show"
+            android:text="@string/no_events_to_show"
             android:layout_gravity="center|center_vertical"
             android:textSize="20sp"
             />
@@ -35,6 +40,7 @@
 
     <ImageButton
         android:id="@+id/createEventButton"
+        android:background="@drawable/add_circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_add_50"
@@ -43,6 +49,7 @@
         android:layout_centerVertical="true"
         android:layout_marginBottom="30dp"
         android:layout_marginRight="30dp"
+        android:contentDescription="@string/create_event"
         />
 
 

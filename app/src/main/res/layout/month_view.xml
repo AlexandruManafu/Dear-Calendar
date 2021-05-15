@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="56dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/monthViewLayout"
     >
-    <LinearLayout
+
+    <View
+        android:layout_height="1dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="70dp"
-        >
-
-
-    </LinearLayout>
+        android:background="@color/black"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/weekDays"
         >
+
         <TextView
             android:layout_width="1dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Mon"
+            android:text="@string/mon"
             android:textAlignment="center"
             android:textSize="17sp"
             >
@@ -34,7 +32,7 @@
             android:layout_width="1dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Tue"
+            android:text="@string/tue"
             android:textAlignment="center"
             android:textSize="17sp"
             >
@@ -43,7 +41,7 @@
             android:layout_width="1dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Wed"
+            android:text="@string/wed"
             android:textAlignment="center"
             android:textSize="17sp"
             >
@@ -52,7 +50,7 @@
             android:layout_width="1dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Thu"
+            android:text="@string/thu"
             android:textAlignment="center"
             android:textSize="17sp"
             >
@@ -61,7 +59,7 @@
             android:layout_width="1dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Fri"
+            android:text="@string/fri"
             android:textAlignment="center"
             android:textSize="17sp"
             >
@@ -70,7 +68,7 @@
             android:layout_width="1dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Sat"
+            android:text="@string/sat"
             android:textAlignment="center"
             android:textSize="17sp"
             >
@@ -79,7 +77,7 @@
             android:layout_width="1dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Sun"
+            android:text="@string/sun"
             android:textAlignment="center"
             android:textSize="17sp"
             >
@@ -91,6 +89,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/monthRecycler" />
+        android:id="@+id/monthRecycler"
+        />
 
 </LinearLayout>

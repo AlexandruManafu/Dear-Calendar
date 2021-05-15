@@ -2,64 +2,50 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/navHome"
-            android:title="Home"
-            android:icon="@drawable/abc_vector_test"/>
 
         <item
             android:id="@+id/monthView"
-            android:title="Month View"
-            android:icon="@drawable/abc_vector_test"/>
-
+            android:title="@string/calendar"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:checkable="true"
+            />
         <item
-            android:id="@+id/weekView"
-            android:title="Week View"
-            android:icon="@drawable/abc_vector_test"/>
+            android:id="@+id/menuLockEvents"
+            android:title="Lock Events"
+            android:icon="@drawable/ic_baseline_lock_24"
+            android:checkable="false"
+            />
+        <item
+            android:id="@+id/menuUnlockEvents"
+            android:title="Unlock Events"
+            android:icon="@drawable/ic_baseline_lock_open_24"
+            android:checkable="false"
+            />
+
 
     </group>
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/templates"
-            android:title="Event Templates"
-            android:icon="@drawable/abc_vector_test">
-
-            <menu>
-                <item
-                    android:id="@+id/addTemplates"
-                    android:title="Add Templates"
-                    android:icon="@drawable/abc_vector_test"/>
-                <item
-                    android:id="@+id/editTemplates"
-                    android:title="Edit Templates"
-                    android:icon="@drawable/abc_vector_test"/>
-
-
-            </menu>
-
-
-        </item>
-
-
-    </group>
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/options"
-            android:title="Options"
-            android:icon="@drawable/abc_vector_test">
+            android:title="@string/preferences"
+           >
 
             <menu>
                 <item
                     android:id="@+id/settings"
-                    android:title="Settings"
-                    android:icon="@drawable/abc_vector_test"/>
+                    android:title="@string/settings"
+                    android:icon="@drawable/ic_baseline_settings_24"
+                    android:checkable="true"
+                    />
 
                 <item
                     android:id="@+id/help"
-                    android:title="Help"
-                    android:icon="@drawable/abc_vector_test"/>
+                    android:title="@string/help"
+                    android:icon="@drawable/ic_baseline_help_24"
+                    android:checkable="true"
+                    />
             </menu>
         </item>
     </group>

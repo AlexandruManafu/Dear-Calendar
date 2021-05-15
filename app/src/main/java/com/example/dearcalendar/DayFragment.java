@@ -1,11 +1,9 @@
 package com.example.dearcalendar;
-
-import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -32,8 +29,13 @@ public class DayFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setDayMonth();
-        constructList();
-        handleButton();
+        if (!MainActivity.eventsLocked)
+        {
+            constructList();
+            handleButton();
+        }
+        else
+            lockedMessage();
 
 
     }
@@ -46,47 +48,71 @@ public class DayFragment extends Fragment {
                 receive.getInt("month") + "-" +
                 receive.getString("day");
 
-        System.out.println(date);
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(received);
     }
 
-    private ArrayList<EventHolder> toArray(Cursor cursor)
+    private void lockedMessage()
     {
-        ArrayList<EventHolder> result = new ArrayList<>();
-        while(cursor.moveToNext())
+        ListView listView  = getView().findViewById(R.id.dayList);
+        TextView textView = getActivity().findViewById(R.id.dayMessage);
+        textView.setText("Events Locked");
+        listView.setEmptyView(textView);
+    }
+
+    private void decryptEvents(ArrayList<EventHolder> array)
+    {
+        EncryptionHandler e = new EncryptionHandler();
+        for(EventHolder item : array )
         {
-            EventHolder element = new EventHolder();
-            element.setTitle(cursor.getString(2));
-            element.setColor(cursor.getString(4));
-            element.setStart(cursor.getString(5));
-            element.setEnd(cursor.getString(6));
-
-            result.add(element);
+            String title= item.getTitle();
+            String decrypted = e.decrypt(title,MainActivity.rawPassword);
+            item.setTitle(decrypted);
         }
-
-        return result;
     }
 
     private void constructList()
     {
-        ListView listView  = (ListView) getView().findViewById(R.id.dayList);
+        ListView listView  = getView().findViewById(R.id.dayList);
         TextView textView = getActivity().findViewById(R.id.dayMessage);
-        /*
-        EventHolder test = new EventHolder("White", "test", "7:00", "8:00");
-        ArrayList<EventHolder> list = new ArrayList<EventHolder>();
-         */
-        DatabaseHandler databaseHandler = new DatabaseHandler(getContext());
-        String sql = "SELECT * FROM events WHERE startDate LIKE '" + date +
-                      "' ORDER BY startHour;";
-        System.out.println(sql);
-        Cursor data = databaseHandler.getData(sql);
-        ArrayList<EventHolder> list = toArray(data);
         listView.setEmptyView(textView);
 
+        DatabaseHandler databaseHandler = MainActivity.databaseHandler;
+
+        ArrayList<EventHolder> list = databaseHandler.getEvents(date);
+
+        databaseHandler.attachImages(list);
+
+        if(!databaseHandler.getSetPassword().equals(""))
+            decryptEvents(list);
 
         EventListAdapter adapter = new EventListAdapter(this.getContext(),R.layout.day_event_layout, list);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int eventId = list.get(position).getId();
+                startCreateEvent(eventId);
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                int eventId = list.get(position).getId();
+                String sql = "DELETE FROM events WHERE eventId == "+eventId+";";
+                databaseHandler.run(sql);
+
+                int recId = list.get(position).getRecId();
+                databaseHandler.removeImage(recId);
+
+                list.remove(position);
+                constructList();
+                return true;
+            }
+        });
     }
 
     private void handleButton()
@@ -96,8 +122,7 @@ public class DayFragment extends Fragment {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                sendStartFragment();
+                startCreateEvent(-1);
             }
         });
     }
@@ -108,13 +133,23 @@ public class DayFragment extends Fragment {
                 fragment).addToBackStack(null).commit(); //display the desired fragment
     }
 
-    private void sendStartFragment()
+    //Will edit an existing event when an id is provided
+    private void startCreateEvent(int eventId)
     {
         Bundle toSend = this.getArguments();
-        Fragment fragment = new CreateEventFragment();
+        CreateEventFragment fragment = new CreateEventFragment();
+        if(eventId==-1)
+            toSend.putString("task", "Create");
+        else
+        {
+            toSend.putString("task","Edit");
+            fragment.setEvent(eventId);
+        }
+
         fragment.setArguments(toSend);
         startFragment(R.id.fragmentContainer,fragment);
     }
+
 
 
 
