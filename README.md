@@ -7,5 +7,3 @@ Additions:
  - Can add images to events
  - Optional password protection with encryption
 
-Documentation coming soon!
-
