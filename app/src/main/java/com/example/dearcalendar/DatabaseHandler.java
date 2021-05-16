@@ -297,9 +297,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    public void removeImage(int recTarget)
+    public void removeUnusedImage(int recTarget)
     {
-        String sql = "DELETE FROM eventImages WHERE recTarget = " + recTarget + ";";
+        String sql = "SELECT recID FROm events WHERE recId ==" + recTarget + ";";
+        if(getData(sql).getCount()>0)
+            return;
+        sql = "DELETE FROM eventImages WHERE recTarget = " + recTarget + ";";
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(sql);
     }

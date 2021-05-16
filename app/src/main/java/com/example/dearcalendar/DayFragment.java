@@ -106,7 +106,7 @@ public class DayFragment extends Fragment {
                 databaseHandler.run(sql);
 
                 int recId = list.get(position).getRecId();
-                databaseHandler.removeImage(recId);
+                databaseHandler.removeUnusedImage(recId);
 
                 list.remove(position);
                 constructList();
